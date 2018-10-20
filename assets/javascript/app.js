@@ -5,42 +5,42 @@ $(document).ready(function () {
             answer: 1,
             photo: "assets/images/ping.gif"
         },
-        
+
         {
             question: "How many sisters did Ariel have in the Little Mermaid?",
             choice: ["6", "3", "7", "5"],
             answer: 0,
             photo: "assets/images/mermaid.gif"
         },
-        
+
         {
             question: "What is Olafs favorite season?",
             choice: ["Fall", "Winter", "Summer", "Spring"],
             answer: 2,
             photo: "assets/images/olaf.gif"
         },
-        
+
         {
             question: "In the Lion King, where does Mufasa and his family live?",
             choice: ["Lion Land", "Africa", "Pride Rock", "Tilted Towers"],
             answer: 2,
             photo: "assets/images/lion.gif"
         },
-        
+
         {
-            question: "What was the bears name in The Jungle Book?",
+            question: "What was the bear's name in The Jungle Book?",
             choice: ["Barry", "Mowgli", "Greg", "Baloo"],
             answer: 3,
             photo: "assets/images/baloo2.gif"
         },
-        
+
         {
             question: "Who is the villin in Peter Pan?",
             choice: ["Captain Crook", "Captain Hook", "Captain Cook", "Bill"],
             answer: 1,
             photo: "assets/images/hook.gif"
         },
-        
+
         {
             question: "In Alice in Wonderland, what is the name of Alice’s kitten?",
             choice: ["Dinah", "Diane", "Garfield", "Snowball"],
@@ -74,6 +74,7 @@ $(document).ready(function () {
             holder.push(options[i]);
         }
     })
+
     //timer start
     function runTimer() {
         if (!running) {
@@ -90,17 +91,17 @@ $(document).ready(function () {
         if (timer === 0) {
             unanswerCount++;
             stop();
-            $("#answerblock").html("<p>Time is up! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+            $("#answerblock").html("<p>Time's up! The correct answer was: " + pick.choice[pick.answer] + "</p>");
             hidepicture();
         }
     }
-
     //timer stop
     function stop() {
         running = false;
         clearInterval(intervalId);
     }
- 
+
+
     function displayQuestion() {
         //generate random index in array
         index = Math.floor(Math.random() * options.length);
@@ -112,17 +113,17 @@ $(document).ready(function () {
             var userChoice = $("<div>");
             userChoice.addClass("answerchoice");
             userChoice.html(pick.choice[i]);
-            
+
             userChoice.attr("data-guessvalue", i);
             $("#answerblock").append(userChoice);
-            
+
         }
 
         $(".answerchoice").on("click", function () {
             //grab array position from userGuess
             userGuess = parseInt($(this).attr("data-guessvalue"));
 
-            //correct guess or wrong guess outcomes
+            //correct and wrong guess outcomes
             if (userGuess === pick.answer) {
                 stop();
                 correctCount++;
@@ -140,7 +141,7 @@ $(document).ready(function () {
         })
     }
 
-
+    //hide picture
     function hidepicture() {
         $("#answerblock").append("<img src=" + pick.photo + ">");
         newArray.push(pick);
@@ -148,12 +149,12 @@ $(document).ready(function () {
 
         var hidpic = setTimeout(function () {
             $("#answerblock").empty();
-            timer = 15;
+            timer = 20;
 
             //run the score screen 
             if ((wrongCount + correctCount + unanswerCount) === qCount) {
                 $("#questionblock").empty();
-                $("#questionblock").html("<h3>Game Over!  Here's how you did: </h3>");
+                $("#questionblock").html("<h3>Game Over!  Here's your score: </h3>");
                 $("#answerblock").append("<h4> Correct: " + correctCount + "</h4>");
                 $("#answerblock").append("<h4> Incorrect: " + wrongCount + "</h4>");
                 $("#answerblock").append("<h4> Unanswered: " + unanswerCount + "</h4>");
@@ -171,7 +172,7 @@ $(document).ready(function () {
 
 
     }
-
+    //reset game
     $("#reset").on("click", function () {
         $("#reset").hide();
         $("#answerblock").empty();
