@@ -35,7 +35,7 @@ $(document).ready(function () {
         },
 
         {
-            question: "Who is the villin in Peter Pan?",
+            question: "Who is the villain in Peter Pan?",
             choice: ["Captain Crook", "Captain Hook", "Captain Cook", "Bill"],
             answer: 1,
             photo: "assets/images/hook.gif"
